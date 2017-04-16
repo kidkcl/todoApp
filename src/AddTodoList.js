@@ -8,15 +8,15 @@ class AddTodoList extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleOnChange(e) {
-        this.setState({ inputText: e.target.value });
+    handleOnChange(event) {
+        this.setState({ inputText: event.target.value });
     }
 
-    handleSubmit(e) {
-        e.preventDefualt();
+    handleSubmit(event) {
+        event.preventDefualt();
         this.props.newTodo(this.state.inputText);
         this.setState({ inputText: '' });
-        // return false;
+        return false;
     }
 
     render() {
