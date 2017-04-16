@@ -14,7 +14,7 @@ class AddTodoList extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.newTodo(this.state.inputText);
+        this.props.newList(this.state.inputText);
         this.setState({ inputText: '' });
         // return false;
     }
@@ -29,7 +29,7 @@ class AddTodoList extends Component {
                         value={this.state.inputText}
                         onChange={this.handleOnChange}
                     />
-                    <button type="button">add</button>
+                    <button>add</button>
                 </form>
             </div>
         );
