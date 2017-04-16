@@ -13,23 +13,23 @@ class AddTodoList extends Component {
     }
 
     handleSubmit(event) {
-        event.preventDefualt();
+        event.preventDefault();
         this.props.newTodo(this.state.inputText);
         this.setState({ inputText: '' });
-        return false;
+        // return false;
     }
 
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form action="#" onSubmit={this.handleSubmit}>
                     <input
                         type="text"
                         placeholder="Name your list"
                         value={this.state.inputText}
                         onChange={this.handleOnChange}
                     />
-                    <button>add</button>
+                    <button type="button">add</button>
                 </form>
             </div>
         );
