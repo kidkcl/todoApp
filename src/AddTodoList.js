@@ -29,7 +29,7 @@ class AddTodoList extends Component {
                         value={this.state.inputText}
                         onChange={this.handleOnChange}
                     />
-                    <button>add</button>
+                    <button onClick={this.handleSubmit}>add</button>
                 </form>
             </div>
         );
