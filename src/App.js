@@ -18,11 +18,30 @@ class App extends Component {
     this.handleDeleteItem = this.handleDeleteItem.bind(this);
     this.handleEditListName = this.handleEditListName.bind(this);
     this.handleDeleteList = this.handleDeleteList.bind(this);
-    this.countDone = this.countDisplay.bind(this);
+    this.countDisplay = this.countDisplay.bind(this);
+    this.findListId = this.findListId.bind(this);
+  }
+
+  findListId(findId, isList, fixId = 0) {
+    const todolist = this.state.allTodoLists;
+    if(isList) {
+      for(let i = 0; i < todolist.length; i++) {
+        if(todolist[i].listId === findId) {
+          return i;
+        }
+      }
+      return -1;
+    } else {
+      for(let j = 0; j < todolist[fixId].listItems.length; j++) {
+        if(todolist[fixId].listItems[j].itemId === findId) {
+          return j;
+        }
+      }
+      return -1;
+    }
   }
 
   countDisplay() {
-    // FIX ME
     const todolist = this.state.allTodoLists;
     let not = 0;
     let yes = 0;
@@ -37,6 +56,7 @@ class App extends Component {
         }
       }
     }
+    console.log('notcmp: '+not);
     this.setState({ undone: not, done: yes });
   }
 
@@ -47,21 +67,33 @@ class App extends Component {
       itemId: id,
     };
     const todolist = this.state.allTodoLists;
-    todolist[listId].listItems.push(newItem);
+    const idx = this.findListId(listId, true);
+    //console.log('listId = ' + listId);
+    //console.log('is it find? ' + idx);
+    todolist[idx].listItems.push(newItem);
     this.setState({ allTodoLists: todolist });
     this.countDisplay();
   }
 
   checkItemInApp(listId, itemId, check) {
     const todolist = this.state.allTodoLists;
-    todolist[listId].listItems[itemId].checked = check;
-    console.log("ischecked: " +todolist[listId].listItems[itemId].checked);
+    const id = this.findListId(listId, true);
+    const iid = this.findListId(itemId, false, id);
+    //console.log('my iid is: ' + iid);
+    //console.log(todolist[id].listItems[iid].itemText);
+    //console.log('check is: '+check);
+    todolist[id].listItems[iid].checked = check;
+    //console.log("ischecked: " +todolist[id].listItems[iid].checked);
+    this.setState({ allTodoLists: todolist });
     this.countDisplay();
   }
 
   handleDeleteItem(listId, itemId) {
     const todolist = this.state.allTodoLists;
-    delete todolist[listId].listItems[itemId];
+    const id = this.findListId(listId, true);
+    const iid = this.findListId(itemId, false, id);
+    console.log('my iid is: ' + iid);
+    todolist[id].listItems.splice(iid, 1);
     this.setState({ allTodoLists: todolist });
     this.countDisplay();
   }
@@ -83,14 +115,23 @@ class App extends Component {
 
   handleEditListName(id, name) {
     const todolist = this.state.allTodoLists;
-    todolist[id].listName = name;
+    for(let i = 0; i < todolist.length; i++) {
+      if(todolist[i].listId === id) {
+        todolist[i].listName = name;
+      }
+    }
     this.setState({ allTodoLists: todolist });
   }
 
   handleDeleteList(id) {
     const todolist = this.state.allTodoLists;
-    delete todolist[id];
+    for(let i = 0; i < todolist.length; i++) {
+      if (todolist[i].listId === id) {
+        todolist.splice(i, 1);
+      }
+    }
     this.setState({ allTodoLists: todolist });
+    this.countDisplay();
   }
 
   render() {
