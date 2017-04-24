@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TodoItem from './TodoItem';
+import '../style/TodoList.css';
 
 class TodoList extends Component {
     constructor(props) {
@@ -67,7 +68,6 @@ class TodoList extends Component {
         if(this.state.nameInEdit) {
             title = (
                 <input
-                    className="ListTitle"
                     type="text"
                     value={this.state.listTitle}
                     onChange={this.handleEditListName}
@@ -77,7 +77,6 @@ class TodoList extends Component {
         } else {
             title = (
                 <p 
-                    className="EditTitle"
                     title="Click to edit"
                     onClick={this.handleEditListOnClick}
                 >{this.state.listTitle}</p>
@@ -86,10 +85,10 @@ class TodoList extends Component {
         return(
             <div className="TodoList">
                 <div className="ListHeader">
-                    {title}
-                    <div className="ListName"> 
-                        <button type="button" className="EditListButton" onClick={this.handleEditListOnClick}>edit</button>
-                        <button type="button" className="DeleteListButton" onClick={this.handleDeleteList}>delete</button>
+                    <div className="ListName">
+                        {title} 
+                        <button type="button" onClick={this.handleEditListOnClick}>edit</button>
+                        <button type="button" onClick={this.handleDeleteList}>delete</button>
                     </div>
                     <input
                         type="text"

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import AddTodoList from './AddTodoList';
 import TodoList from './TodoList';
-import './App.css';
+import '../style/App.css';
 
 class App extends Component {
   constructor(props) {
@@ -146,7 +146,7 @@ class App extends Component {
         <div className="App-content">
           <h3>這裡render todolist</h3>
           {this.state.allTodoLists.map(todolist =>
-            <TodoList
+            <TodoList className="App-list"
               key={todolist.listId} checkItem={this.checkItemInApp}
               addItem={this.handleAddItem} deleteItem={this.handleDeleteItem}
               editTitle={this.handleEditListName} deleteList={this.handleDeleteList}

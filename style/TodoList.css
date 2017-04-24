@@ -1,0 +1,7 @@
+.TodoList {
+    display: inline-block;
+    width: 300px;
+    height: 400px;
+    margin: 1em;
+    overflow: scroll;
+}

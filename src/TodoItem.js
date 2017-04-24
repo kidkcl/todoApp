@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../style/TodoItem.css';
 
 class TodoItem extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class TodoItem extends Component {
     render() {
         return (
             <div className="TodoItem">
-                <input type="checkbox" onChange={this.handleCheckItem}/>
+                <input type="checkbox" checked={this.props.itemContent.checked} onChange={this.handleCheckItem}/>
                 <label className="CheckButton" onClick={this.handleCheckItem}>{this.props.itemContent.itemText}</label>
                 <button className="DeleteButton" onClick={this.handleDeleteItem}>del</button>
             </div>
